@@ -101,16 +101,15 @@ const loginUser = asyncHandler(async (req, res) => {
   // Get user email and password
   const { username, email, password } = req.body;
   // validate input
-
   if (!username && !email) {
-    throw new Error(400, "username or email is required");
+    throw new ApiError(400, "username or email is required");
   }
   if (!password) {
-    throw new Error(400, "password is required");
+    throw new ApiError(400, "password is required");
   }
   // Check if user with email exist and also match password
   const user = await User.findOne({
-    $or: [{ email, username }],
+    $or: [{ email }, { username }],
   });
 
   if (!user) {
