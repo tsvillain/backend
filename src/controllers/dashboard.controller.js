@@ -16,7 +16,7 @@ const getChannelVideos = asyncHandler(async (req, res) => {
   const videos = await Video.find({
     owner: channelId,
     isPublished: true,
-  }).exec();
+  });
 
   return res
     .status(200)
